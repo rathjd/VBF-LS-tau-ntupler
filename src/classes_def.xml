@@ -1,0 +1,6 @@
+<lcgdict>
+ <class name="HelperFor<pat::Electron>"/>
+ <class name="pat::ElectronHelper"/>
+ <class name="HelperFor<pat::Tau>"/>
+ <class name="pat::TauHelper"/>
+</lcgdict>
