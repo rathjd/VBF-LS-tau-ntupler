@@ -99,3 +99,7 @@
 </library>
 <library file="userplugin_patTauHelper.cc" name="patTauHelper">
 </library>
+
+<use name="ntuples/VBF-LS-tau-ntupler"/>
+<library file="userplugin_recoGenParticleHelperPlus.cc" name="recoGenParticleHelperPlus">
+</library>

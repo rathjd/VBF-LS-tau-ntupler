@@ -1,6 +1,13 @@
 #-------------------------------------------------------------------------
 # Created: Mon Mar 25 16:11:24 2013 by /afs/naf.desy.de/user/m/marconi/scratch/SingleTau/ntupleProducer/CMSSW_5_3_7_patch4/src/VBFntupleProducer/VBFntupleProducer/python/test_Trigger_cfi.py
 #-------------------------------------------------------------------------
+
+# next round: need helper for taus?
+# next round: remove genparticlehelper, only keep genparticlehelperplus
+# next round: update to latest version ntuplemaker
+# next round: remove redundant kinematic variables: keep pt, eta, phi, mass
+# next round: add genjets if, hopefully, they are added to the pat recipe
+
 import FWCore.ParameterSet.Config as cms
 demo =\
 cms.EDAnalyzer("TheNtupleMaker",
@@ -16,6 +23,7 @@ cms.EDAnalyzer("TheNtupleMaker",
     'edmEventHelper',
     'GenRunInfoProduct',
     'recoGenParticleHelper',
+    'recoGenParticleHelperPlus',
     'recoBeamSpot',
     'patJet',
     'patElectron',
@@ -24,7 +32,7 @@ cms.EDAnalyzer("TheNtupleMaker",
     'patTau',
     'patMET',
     'recoPFMET',
-    'recoPFMET1'
+    'recoPFMET1',
     ),
 
 
@@ -110,7 +118,7 @@ cms.EDAnalyzer("TheNtupleMaker",
                      recoGenParticleHelper = 
                      cms.untracked.
                      vstring(
-    'recoGenParticleHelper           genParticles                     500',
+    'recoGenParticleHelperPlus           genParticles                     100',
    #---------------------------------------------------------------------                                                                                                                                  
     '    int   firstMother()',
     '    int   lastMother()',
@@ -124,7 +132,23 @@ cms.EDAnalyzer("TheNtupleMaker",
     ' double   phi()',
     ' double   mass()'
     ),
-
+                     recoGenParticleHelperPlus = 
+                     cms.untracked.
+                     vstring(
+    'recoGenParticleHelperPlus           genParticles                     100',
+   #---------------------------------------------------------------------                                                                                                                                  
+    '    int   firstMother()',
+    '    int   lastMother()',
+    '    int   firstDaughter()',
+    '    int   lastDaughter()',
+    '    int   charge()',
+    '    int   pdgId()',
+    '    int   status()',
+    ' double   pt()',
+    ' double   eta()',
+    ' double   phi()',
+    ' double   mass()'
+    ),
                      recoBeamSpot = 
                      cms.untracked.
                      vstring(
@@ -426,8 +450,5 @@ cms.EDAnalyzer("TheNtupleMaker",
     'double  pt()',
     'double  phi()',
     'double  eta()'
-    )
-
-
-
+    ),
                )
