@@ -118,7 +118,7 @@ cms.EDAnalyzer("TheNtupleMaker",
                      recoGenParticleHelper = 
                      cms.untracked.
                      vstring(
-    'recoGenParticleHelperPlus           genParticles                     100',
+    'recoGenParticleHelper              genParticles                     100',
    #---------------------------------------------------------------------                                                                                                                                  
     '    int   firstMother()',
     '    int   lastMother()',

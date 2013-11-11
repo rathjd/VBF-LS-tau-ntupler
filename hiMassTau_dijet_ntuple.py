@@ -3,7 +3,7 @@ import FWCore.ParameterSet.Config as cms
 process = cms.Process("PATTuple")
 
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('/store/data/Run2012A/Jet/AOD/22Jan2013-v1/20000/00088EE3-3E72-E211-BF69-0026189438DD.root')
+    fileNames = cms.untracked.vstring('/store/data/Run2012B/MultiJet1Parked/AOD/05Nov2012-v2/10014/F637C162-214E-E211-BFD2-003048D45FC6.root')
 )
 process.PFCandAssoMap = cms.EDProducer("PFCand_AssoMap",
     ConversionsCollection = cms.InputTag("allConversions"),
@@ -14308,14 +14308,14 @@ process.patElectrons = cms.EDProducer("PATElectronProducer",
         eidRobustHighEnergy = cms.InputTag("eidRobustHighEnergy"),
         eidRobustLoose = cms.InputTag("eidRobustLoose")
     ),
-    genParticleMatch = cms.InputTag(""),
+    genParticleMatch = cms.InputTag("electronMatch"),
     beamLineSrc = cms.InputTag("offlineBeamSpot"),
-    addGenMatch = cms.bool(False),
+    addGenMatch = cms.bool(True),
     addResolutions = cms.bool(False),
     isoDeposits = cms.PSet(
 
     ),
-    embedGenMatch = cms.bool(False)
+    embedGenMatch = cms.bool(True)
 )
 
 
@@ -14411,24 +14411,24 @@ process.patJetPartons = cms.EDProducer("PartonSelector",
 
 process.patJets = cms.EDProducer("PATJetProducer",
     addJetCharge = cms.bool(True),
-    addGenJetMatch = cms.bool(False),
+    addGenJetMatch = cms.bool(True),
     embedPFCandidates = cms.bool(True),
     embedGenJetMatch = cms.bool(True),
     addAssociatedTracks = cms.bool(True),
     partonJetSource = cms.InputTag("NOT_IMPLEMENTED"),
-    addGenPartonMatch = cms.bool(False),
-    JetPartonMapSource = cms.InputTag(""),
+    addGenPartonMatch = cms.bool(True),
+    JetPartonMapSource = cms.InputTag("patJetFlavourAssociation"),
     resolutions = cms.PSet(
 
     ),
-    genPartonMatch = cms.InputTag(""),
+    genPartonMatch = cms.InputTag("patJetPartonMatch"),
     addTagInfos = cms.bool(False),
     addPartonJetMatch = cms.bool(False),
-    embedGenPartonMatch = cms.bool(False),
+    embedGenPartonMatch = cms.bool(True),
     efficiencies = cms.PSet(
 
     ),
-    genJetMatch = cms.InputTag(""),
+    genJetMatch = cms.InputTag("patJetGenJetMatch"),
     userData = cms.PSet(
         userCands = cms.PSet(
             src = cms.VInputTag("")
@@ -14458,7 +14458,7 @@ process.patJets = cms.EDProducer("PATJetProducer",
     addBTagInfo = cms.bool(True),
     embedCaloTowers = cms.bool(True),
     addResolutions = cms.bool(False),
-    getJetMCFlavour = cms.bool(False),
+    getJetMCFlavour = cms.bool(True),
     addDiscriminators = cms.bool(True),
     jetChargeSource = cms.InputTag("patJetCharge"),
     addJetCorrFactors = cms.bool(True),
@@ -14487,11 +14487,11 @@ process.patMETs = cms.EDProducer("PATMETProducer",
     ),
     addResolutions = cms.bool(False),
     addEfficiencies = cms.bool(False),
-    genMETSource = cms.InputTag(""),
+    genMETSource = cms.InputTag("genMetTrue"),
     efficiencies = cms.PSet(
 
     ),
-    addGenMET = cms.bool(False),
+    addGenMET = cms.bool(True),
     addMuonCorrections = cms.bool(False),
     muonSource = cms.InputTag("muons"),
     resolutions = cms.PSet(
@@ -14576,14 +14576,14 @@ process.patMuons = cms.EDProducer("PATMuonProducer",
     embedMuonBestTrack = cms.bool(True),
     muonSource = cms.InputTag("muons"),
     embedCombinedMuon = cms.bool(True),
-    genParticleMatch = cms.InputTag(""),
+    genParticleMatch = cms.InputTag("muonMatch"),
     beamLineSrc = cms.InputTag("offlineBeamSpot"),
-    addGenMatch = cms.bool(False),
+    addGenMatch = cms.bool(True),
     addResolutions = cms.bool(False),
     isoDeposits = cms.PSet(
 
     ),
-    embedGenMatch = cms.bool(False),
+    embedGenMatch = cms.bool(True),
     tcMETMuonCorrs = cms.InputTag("muonTCMETValueMapProducer","muCorrData"),
     embedPickyMuon = cms.bool(True)
 )
@@ -14606,7 +14606,7 @@ process.patPhotons = cms.EDProducer("PATPhotonProducer",
         userFunctionLabels = cms.vstring(),
         userFunctions = cms.vstring()
     ),
-    addGenMatch = cms.bool(False),
+    addGenMatch = cms.bool(True),
     addResolutions = cms.bool(False),
     addEfficiencies = cms.bool(False),
     photonIDSources = cms.PSet(
@@ -14620,7 +14620,7 @@ process.patPhotons = cms.EDProducer("PATPhotonProducer",
 
     ),
     embedSuperCluster = cms.bool(True),
-    embedGenMatch = cms.bool(False),
+    embedGenMatch = cms.bool(True),
     resolutions = cms.PSet(
 
     ),
@@ -14629,7 +14629,7 @@ process.patPhotons = cms.EDProducer("PATPhotonProducer",
     userIsolation = cms.PSet(
 
     ),
-    genParticleMatch = cms.InputTag("")
+    genParticleMatch = cms.InputTag("photonMatch")
 )
 
 
@@ -14685,8 +14685,8 @@ process.patTaus = cms.EDProducer("PATTauProducer",
         againstMuonMedium2 = cms.InputTag("hpsPFTauDiscriminationByMediumMuonRejection2"),
         againstMuonTight2 = cms.InputTag("hpsPFTauDiscriminationByTightMuonRejection2")
     ),
-    addGenJetMatch = cms.bool(False),
-    embedGenJetMatch = cms.bool(False),
+    addGenJetMatch = cms.bool(True),
+    embedGenJetMatch = cms.bool(True),
     embedLeadTrack = cms.bool(False),
     embedLeadPFCand = cms.bool(False),
     embedSignalPFChargedHadrCands = cms.bool(False),
@@ -14721,7 +14721,7 @@ process.patTaus = cms.EDProducer("PATTauProducer",
     efficiencies = cms.PSet(
 
     ),
-    genJetMatch = cms.InputTag(""),
+    genJetMatch = cms.InputTag("tauGenJetMatch"),
     embedIsolationPFCands = cms.bool(False),
     userData = cms.PSet(
         userCands = cms.PSet(
@@ -14746,8 +14746,8 @@ process.patTaus = cms.EDProducer("PATTauProducer",
     tauJetCorrFactorsSource = cms.VInputTag(cms.InputTag("patTauJetCorrFactors")),
     embedIsolationPFNeutralHadrCands = cms.bool(False),
     addTauID = cms.bool(True),
-    genParticleMatch = cms.InputTag(""),
-    addGenMatch = cms.bool(False),
+    genParticleMatch = cms.InputTag("tauMatch"),
+    addGenMatch = cms.bool(True),
     addResolutions = cms.bool(False),
     embedIsolationPFChargedHadrCands = cms.bool(False),
     embedIsolationTracks = cms.bool(False),
@@ -14759,7 +14759,7 @@ process.patTaus = cms.EDProducer("PATTauProducer",
         pfGamma = cms.InputTag("tauIsoDepositPFGammas")
     ),
     embedLeadPFChargedHadrCand = cms.bool(False),
-    embedGenMatch = cms.bool(False),
+    embedGenMatch = cms.bool(True),
     embedLeadPFNeutralCand = cms.bool(False)
 )
 
@@ -18172,24 +18172,6 @@ process.genTauDecaysToMuonCands = cms.EDFilter("TauGenJetDecayModeSelector",
 )
 
 
-process.hltFilter = cms.EDFilter("TriggerResultsFilter",
-    l1tIgnoreMask = cms.bool(False),
-    l1tResults = cms.InputTag(""),
-    l1techIgnorePrescales = cms.bool(False),
-    hltResults = cms.InputTag("TriggerResults","","HLT"),
-    triggerConditions = cms.vstring('HLT_DiPFJetAve40*', 
-        'HLT_DiPFJetAve80*', 
-        'HLT_DiPFJetAve140*', 
-        'HLT_DiPFJetAve200*', 
-        'HLT_DiPFJetAve260*', 
-        'HLT_DiPFJetAve320*', 
-        'HLT_DiPFJetAve400*', 
-        'HLT_QuadJet50*'),
-    throw = cms.bool(False),
-    daqPartitions = cms.uint32(1)
-)
-
-
 process.mumuHLTFilter = cms.EDFilter("TriggerResultsFilter",
     l1tIgnoreMask = cms.bool(False),
     l1tResults = cms.InputTag(""),
@@ -18603,14 +18585,20 @@ process.demo = cms.EDAnalyzer("TheNtupleMaker",
         'double  filterEfficiency()', 
         'double  crossSection()', 
         'double internalXSec().value()'),
-    edmEventHelper = cms.untracked.vstring('edmEventHelper                  info                              1', 
-        '   bool  isRealData()', 
-        '   int   run()', 
-        '   int   event()', 
-        '   int   luminosityBlock()', 
-        '   int   bunchCrossing()', 
-        '   int   orbitNumber()'),
-    recoGenParticleHelper = cms.untracked.vstring('recoGenParticleHelper           genParticles                     500', 
+    analyzerName = cms.untracked.string('analyzer.cc'),
+    recoGenParticleHelperPlus = cms.untracked.vstring('recoGenParticleHelperPlus           genParticles                     100', 
+        '    int   firstMother()', 
+        '    int   lastMother()', 
+        '    int   firstDaughter()', 
+        '    int   lastDaughter()', 
+        '    int   charge()', 
+        '    int   pdgId()', 
+        '    int   status()', 
+        ' double   pt()', 
+        ' double   eta()', 
+        ' double   phi()', 
+        ' double   mass()'),
+    recoGenParticleHelper = cms.untracked.vstring('recoGenParticleHelperPlus           genParticles                     100', 
         '    int   firstMother()', 
         '    int   lastMother()', 
         '    int   firstDaughter()', 
@@ -18659,7 +18647,13 @@ process.demo = cms.EDAnalyzer("TheNtupleMaker",
         'int prescale("HLT_DiPFJetAve260_v1...20") prescale_HLT_DiPFJetAve260_v', 
         'int prescale("HLT_DiPFJetAve320_v1...20") prescale_HLT_DiPFJetAve320_v', 
         'int prescale("HLT_DiPFJetAve400_v1...20") prescale_HLT_DiPFJetAve400_v'),
-    analyzerName = cms.untracked.string('analyzer.cc'),
+    edmEventHelper = cms.untracked.vstring('edmEventHelper                  info                              1', 
+        '   bool  isRealData()', 
+        '   int   run()', 
+        '   int   event()', 
+        '   int   luminosityBlock()', 
+        '   int   bunchCrossing()', 
+        '   int   orbitNumber()'),
     PileupSummaryInfo = cms.untracked.vstring('PileupSummaryInfo                addPileupInfo                     10', 
         '   int getBunchCrossing()', 
         '   int getPU_NumInteractions()'),
@@ -18769,6 +18763,7 @@ process.demo = cms.EDAnalyzer("TheNtupleMaker",
         'edmEventHelper', 
         'GenRunInfoProduct', 
         'recoGenParticleHelper', 
+        'recoGenParticleHelperPlus', 
         'recoBeamSpot', 
         'patJet', 
         'patElectron', 
@@ -18944,13 +18939,15 @@ process.out = cms.OutputModule("PoolOutputModule",
         'drop *_ak5PFJetsRecoTauPiZeros_*_*', 
         'drop recoSuperCluster*_*_*_*', 
         'drop *_muIsoDeposit*_*_RECO', 
-        'drop *_selectedPatJets*_genJets_*', 
         'keep *_selectedPatJets_pfCandidates_*', 
         'drop *_selectedPatJets_caloTowers_*')
 )
 
 
 process.patElectronTrackIsolation = cms.Sequence(process.eleIsoDepositTk+process.eleIsoFromDepsTk)
+
+
+process.hltFilter = cms.Sequence()
 
 
 process.hpsPFTauDiscriminationByIsolationSeq = cms.Sequence(process.hpsPFTauDiscriminationByVLooseIsolation+process.hpsPFTauDiscriminationByLooseIsolation+process.hpsPFTauDiscriminationByMediumIsolation+process.hpsPFTauDiscriminationByTightIsolation)
@@ -19274,10 +19271,10 @@ process.patCandidates = cms.Sequence(process.makePatElectrons+process.makePatMuo
 process.PFBRECO = cms.Sequence(process.pfNoPileUpSequence+process.pfParticleSelectionSequence+process.pfPhotonSequence+process.pfMuonSequence+process.pfNoMuon+process.pfElectronSequence+process.pfNoElectron+process.pfJetSequence+process.pfNoJet+process.pfTauSequence+process.pfNoTau+process.pfMET)
 
 
-process.patDefaultSequence = cms.Sequence(process.patElectrons+process.patMuons+process.patHPSPFTauDiscriminationUpdate+process.patPFCandidateIsoDepositSelection+process.patPFTauIsolation+process.patTaus+process.patPhotons+process.patJetCorrections+process.jetTracksAssociatorAtVertex+process.btaggingAOD+process.patJetCharge+process.patJets+process.makePatMETs+process.patCandidateSummary+process.selectedPatCandidates+process.cleanPatCandidates+process.countPatCandidates)
+process.patDefaultSequence = cms.Sequence(process.makePatElectrons+process.makePatMuons+process.makePatTaus+process.makePatPhotons+process.patJetCorrections+process.jetTracksAssociatorAtVertex+process.btaggingAOD+process.patJetCharge+process.patJetPartonMatch+process.patJetGenJetMatch+process.patJetFlavourId+process.patJets+process.makePatMETs+process.patCandidateSummary+process.selectedPatCandidates+process.cleanPatCandidates+process.countPatCandidates)
 
 
-process.p = cms.Path(process.scrapingVeto+process.type0PFMEtCorrection+process.recoTauClassicHPSSequence+process.patDefaultSequence+process.kt6PFJetsForIsolation+process.eleIsoSequence+process.muIsoSequence+process.heepPatElectrons+process.hltFilter+process.theSkim+process.demo)
+process.p = cms.Path(process.type0PFMEtCorrection+process.recoTauClassicHPSSequence+process.patDefaultSequence+process.kt6PFJetsForIsolation+process.eleIsoSequence+process.muIsoSequence+process.heepPatElectrons+process.theSkim+process.demo)
 
 
 process.outpath = cms.EndPath()
@@ -21332,7 +21329,7 @@ process.GlobalTag = cms.ESSource("PoolDBESSource",
     BlobStreamerName = cms.untracked.string('TBufferBlobStreamingService'),
     toGet = cms.VPSet(),
     connect = cms.string('frontier://FrontierProd/CMS_COND_31X_GLOBALTAG'),
-    globaltag = cms.string('FT_53_V10_AN3::All')
+    globaltag = cms.string('START53_V7G::All')
 )
 
 

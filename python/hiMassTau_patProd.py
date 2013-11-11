@@ -218,6 +218,11 @@ if(channel == "dijet"):
     throw = False
     )
   process.genLevelSelection = cms.Sequence(  )
+if(channel == "inclusive"):
+  process.theSkim = cms.Sequence()
+  process.hltFilter = cms.Sequence()
+  process.genLevelSelection = cms.Sequence()
+
 
 
 # Standard pat sequences
