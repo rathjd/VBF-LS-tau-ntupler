@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
-// Created: Wed Oct 30 15:31:24 2013 by mkhelper.py
-// Author:  Lukas Vanelderen      
+// Created: Mon Nov 18 14:27:14 2013 by mkhelper.py
+// Author:  Daniele Marconi      
 // ----------------------------------------------------------------------------
 #include "PhysicsTools/TheNtupleMaker/interface/UserBuffer.h"
 #include "PhysicsTools/TheNtupleMaker/interface/pluginfactory.h"

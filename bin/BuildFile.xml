@@ -20,5 +20,5 @@
 <use   name="rootminuit"/>
 <use   name="rootmath"/>
 <use   name="f77compiler"/>
-<bin name="vbfntupleproducervbfntupleproducer" file="vbfntupleproducervbfntupleproducer.cc">
+<bin name="ntuplesvbf-ls-tau-ntupler" file="ntuplesvbf-ls-tau-ntupler.cc">
 </bin>

@@ -1,10 +1,10 @@
 #ifndef PATELECTRONHELPER_H
 #define PATELECTRONHELPER_H
 //-----------------------------------------------------------------------------
-// Subsystem:   VBFntupleProducer
-// Package:     VBFntupleProducer
+// Subsystem:   ntuples
+// Package:     VBF-LS-tau-ntupler
 // Description: TheNtupleMaker helper class for pat::Electron
-// Created:     Fri Apr  5 14:39:07 2013
+// Created:     Mon Nov 18 14:24:41 2013
 // Author:      Daniele Marconi      
 //-----------------------------------------------------------------------------
 #include <algorithm>
@@ -99,6 +99,11 @@ namespace pat
     // -- Access Methods
     // ---------------------------------------------------------
 
+	// WARNING: some methods may fail to compile because of coding
+	//          problems in one of the CMSSW base classes. If so,
+	//          just comment out the offending method and try again.
+  
+
 
     // from reco::GsfElectron
     bool ambiguous() const { return object->ambiguous(); }
@@ -116,6 +121,10 @@ namespace pat
     // from reco::GsfElectron
     std::size_t ambiguousGsfTracksSize() const
     { return object->ambiguousGsfTracksSize(); }
+
+    // from pat::Electron
+    const std::vector<reco::CaloCluster> basicClusters() const
+    { return object->basicClusters(); }
 
     // from reco::GsfElectron
     int basicClustersSize() const { return object->basicClustersSize(); }
@@ -786,7 +795,15 @@ namespace pat
     pfIsolationVariables() const
     { return object->pfIsolationVariables(); }
 
-    // from reco::GsfElectron
+    // from pat::Electron
+    const std::vector<reco::CaloCluster> pflowBasicClusters() const
+    { return object->pflowBasicClusters(); }
+
+    // from pat::Electron
+    const std::vector<reco::CaloCluster> pflowPreshowerClusters() const
+    { return object->pflowPreshowerClusters(); }
+
+    // from pat::Electron
     reco::SuperClusterRef pflowSuperCluster() const
     { return object->pflowSuperCluster(); }
 
@@ -806,6 +823,10 @@ namespace pat
     // from reco::LeafCandidate
     const math::PtEtaPhiMLorentzVector polarP4() const
     { return object->polarP4(); }
+
+    // from pat::Electron
+    const std::vector<reco::CaloCluster> preshowerClusters() const
+    { return object->preshowerClusters(); }
 
     // from reco::LeafCandidate
     double pt() const { return object->pt(); }

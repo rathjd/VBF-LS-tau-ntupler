@@ -2,10 +2,13 @@
 // Subsystem:   ntuples
 // Package:     VBF-LS-tau-ntupler
 // Description: TheNtupleMaker helper class for reco::GenParticle
-// Created:     Wed Oct 30 15:31:24 2013
-// Author:      Lukas Vanelderen      
+// Created:     Mon Nov 18 14:27:14 2013
+// Author:      Daniele Marconi      
 //-----------------------------------------------------------------------------
 #include "ntuples/VBF-LS-tau-ntupler/interface/recoGenParticleHelperPlus.h"
+#include "FWCore/Framework/interface/Event.h"
+#include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "HLTrigger/HLTcore/interface/HLTConfigProvider.h"
 //-----------------------------------------------------------------------------
 using namespace std;
 using namespace reco;
@@ -23,7 +26,7 @@ GenParticleHelperPlus::analyzeEvent()
   // Initialize string representation/position map
   if ( event == 0 )
     throw edm::Exception(edm::errors::Configuration,
-                         "\nGenParticleHelperPlus - " 
+                         "\nGenParticleHelperPlus - "
                          "event pointer is ZERO");
   
   // Get genparticles:
@@ -32,7 +35,7 @@ GenParticleHelperPlus::analyzeEvent()
   event->getByLabel("genParticles", handle);
   if (!handle.isValid())
     throw edm::Exception(edm::errors::Configuration,
-                         "\nGenParticleHelperPlus - " 
+                         "\nGenParticleHelperPlus - "
                          "GenParticle handle is invalid");
 
   // Write a unique string for each genparticle
@@ -42,7 +45,7 @@ GenParticleHelperPlus::analyzeEvent()
   amap.clear();
 
   int n_stored = 0;
-  for(unsigned int i = 0; i < handle->size(); i++) 
+  for(unsigned int i = 0; i < handle->size(); i++)
     {
       const GenParticle* p = &((*handle)[i]);
     
@@ -52,7 +55,7 @@ GenParticleHelperPlus::analyzeEvent()
       //store particles with status 3
       if(p->status()==3)
         store = true;
-      //store the decaying b and c hadrons 
+      //store the decaying b and c hadrons
       //(allways status 2)
       else if(p->status()==2)
         {
@@ -87,48 +90,48 @@ GenParticleHelperPlus::analyzeEvent()
 
       // special treatment for taus
       if (abs(p->pdgId())==15)
-	store = true;
+        store = true;
       else
-	for (unsigned int m =0;m<p->numberOfMothers();++m){
-	  if(abs(p->mother(m)->pdgId())==15)
-	    {
-	      store = true;
-	    }
-	  // sometimes the decay is stored with intermediate steps...
-	  else if(abs(p->mother(m)->pdgId())==24){
-	    for (unsigned int m2 =0;m2<p->mother(m)->numberOfMothers();++m2){
-	      if(abs(p->mother(m)->mother(m2)->pdgId())==15)
-		{
-		  store = true;
-		  break;
-		}
-	    }
-	  }
-	  if(store)
-	    break;
-	}
+        for (unsigned int m =0;m<p->numberOfMothers();++m){
+         if(abs(p->mother(m)->pdgId())==15)
+         {
+         store = true;
+         }
+         // sometimes the decay is stored with intermediate steps...
+         else if(abs(p->mother(m)->pdgId())==24){
+         for (unsigned int m2 =0;m2<p->mother(m)->numberOfMothers();++m2){
+         if(abs(p->mother(m)->mother(m2)->pdgId())==15)
+                {
+                 store = true;
+                 break;
+                }
+         }
+         }
+         if(store)
+         break;
+        }
       
       if ( !store ) continue;
 
       char particle[255];
       sprintf(particle,"%d%d%f%f%f%f",
-              p->pdgId(), 
-              p->status(), 
-              p->px(), 
-              p->py(), 
-              p->pz(), 
+              p->pdgId(),
+              p->status(),
+              p->px(),
+              p->py(),
+              p->pz(),
               p->energy());
       amap[string(particle)] = n_stored;
       n_stored++;
     }
 }
 
-void 
+void
 GenParticleHelperPlus::analyzeObject()
 {
   if ( object == 0 )
     throw edm::Exception(edm::errors::Configuration,
-                         "\nGenParticleHelperPlus - " 
+                         "\nGenParticleHelperPlus - "
                          "object pointer is ZERO");
 
   // save only status = 3 particles
@@ -138,7 +141,7 @@ GenParticleHelperPlus::analyzeObject()
   //store particles with status 3
   if(object->status()==3)
     store = true;
-  //store the decaying b and c hadrons 
+  //store the decaying b and c hadrons
   //(allways status 2)
   else if(object->status()==2)
     {
@@ -175,21 +178,21 @@ GenParticleHelperPlus::analyzeObject()
   else
     for (unsigned int m =0;m<object->numberOfMothers();++m){
       if(abs(object->mother(m)->pdgId())==15)
-	{
-	  store = true;
-	}
+        {
+         store = true;
+        }
       // sometimes the decay is stored with intermediate steps...
       else if(abs(object->mother(m)->pdgId())==24){
-	for (unsigned int m2 =0;m2<object->mother(m)->numberOfMothers();++m2){
-	  if(abs(object->mother(m)->mother(m2)->pdgId())==15)
-	    {
-	      store = true;
-	      break;
-	    }
-	}
+        for (unsigned int m2 =0;m2<object->mother(m)->numberOfMothers();++m2){
+         if(abs(object->mother(m)->mother(m2)->pdgId())==15)
+         {
+         store = true;
+         break;
+         }
+        }
       }
       if(store)
-	break;
+        break;
     }
   if ( !store )
     {
@@ -197,45 +200,45 @@ GenParticleHelperPlus::analyzeObject()
       return;
     }
   
-  // Find the ordinal value of first and last mothers by comparing the 
-  // string representation of mothers with the string representation of 
+  // Find the ordinal value of first and last mothers by comparing the
+  // string representation of mothers with the string representation of
   // each gen-particle in the list:
 
   char particle[255];
 
   mothers_.clear();
-  for(unsigned int j=0; j < object->numberOfMothers(); j++) 
+  for(unsigned int j=0; j < object->numberOfMothers(); j++)
     {
-      const GenParticle* m = 
+      const GenParticle* m =
         dynamic_cast<const GenParticle*>(object->mother(j));
       if ( m == 0 ) continue;
       sprintf(particle,"%d%d%f%f%f%f",
-              m->pdgId(), 
-              m->status(), 
-              m->px(), 
-              m->py(), 
-              m->pz(), 
+              m->pdgId(),
+              m->status(),
+              m->px(),
+              m->py(),
+              m->pz(),
               m->energy());
-      if ( amap.find(string(particle)) != amap.end() ) 
+      if ( amap.find(string(particle)) != amap.end() )
         mothers_.push_back( amap[string(particle)] );
     }
 
-  // Find the ordinal value of first and last daughters by comparing the 
-  // string representation of daughters with the string representation of 
+  // Find the ordinal value of first and last daughters by comparing the
+  // string representation of daughters with the string representation of
   // each gen-particle in the list:
 
   daughters_.clear();
-  for(unsigned int j=0; j < object->numberOfDaughters(); j++) 
+  for(unsigned int j=0; j < object->numberOfDaughters(); j++)
     {
-      const GenParticle* d = 
+      const GenParticle* d =
         dynamic_cast<const GenParticle*>(object->daughter(j));
       if ( d == 0 ) continue;
-      sprintf(particle,"%d%d%f%f%f%f", 
-              d->pdgId(),  
-              d->status(), 
-              d->px(), 
-              d->py(), 
-              d->pz(), 
+      sprintf(particle,"%d%d%f%f%f%f",
+              d->pdgId(),
+              d->status(),
+              d->px(),
+              d->py(),
+              d->pz(),
               d->energy());
       
       if ( amap.find(string(particle)) != amap.end() ) {
@@ -244,16 +247,16 @@ GenParticleHelperPlus::analyzeObject()
     }
 }
 
-int      GenParticleHelperPlus::charge() const { return object->charge(); }
-int      GenParticleHelperPlus::pdgId()  const { return object->pdgId(); }
-int      GenParticleHelperPlus::status() const { return object->status(); }
-double   GenParticleHelperPlus::energy() const { return object->energy(); }
-double   GenParticleHelperPlus::pt()     const { return object->pt(); }
-double   GenParticleHelperPlus::eta()    const { return object->eta(); }
-double   GenParticleHelperPlus::phi()    const { return object->phi(); }
-double   GenParticleHelperPlus::mass()   const { return object->mass(); }
+int GenParticleHelperPlus::charge() const { return object->charge(); }
+int GenParticleHelperPlus::pdgId() const { return object->pdgId(); }
+int GenParticleHelperPlus::status() const { return object->status(); }
+double GenParticleHelperPlus::energy() const { return object->energy(); }
+double GenParticleHelperPlus::pt() const { return object->pt(); }
+double GenParticleHelperPlus::eta() const { return object->eta(); }
+double GenParticleHelperPlus::phi() const { return object->phi(); }
+double GenParticleHelperPlus::mass() const { return object->mass(); }
 
-int 
+int
 GenParticleHelperPlus::firstMother() const
 {
   if ( mothers_.size() > 0 )
@@ -262,7 +265,7 @@ GenParticleHelperPlus::firstMother() const
     return -1;
 }
 
-int 
+int
 GenParticleHelperPlus::lastMother() const
 {
   if ( mothers_.size() > 0 )
@@ -271,7 +274,7 @@ GenParticleHelperPlus::lastMother() const
     return -1;
 }
 
-int 
+int
 GenParticleHelperPlus::firstDaughter() const
 {
   if ( daughters_.size() > 0 )
@@ -280,7 +283,7 @@ GenParticleHelperPlus::firstDaughter() const
     return -1;
 }
 
-int 
+int
 GenParticleHelperPlus::lastDaughter() const
 {
   if ( daughters_.size() > 0 )
@@ -288,5 +291,3 @@ GenParticleHelperPlus::lastDaughter() const
   else
     return -1;
 }
-
-

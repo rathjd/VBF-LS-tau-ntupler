@@ -1,11 +1,11 @@
 #ifndef PATTAUHELPER_H
 #define PATTAUHELPER_H
 //-----------------------------------------------------------------------------
-// Subsystem:   VBFntupleProducer
-// Package:     VBFntupleProducer
+// Subsystem:   ntuples
+// Package:     VBF-LS-tau-ntupler
 // Description: TheNtupleMaker helper class for pat::Tau
-// Created:     Thu May 30 14:21:40 2013
-// Author:      Lukas Vanelderen      
+// Created:     Mon Nov 18 14:23:58 2013
+// Author:      Daniele Marconi      
 //-----------------------------------------------------------------------------
 #include <algorithm>
 #include <iostream>
@@ -89,9 +89,8 @@ namespace pat
 	// -- User access methods go here
 	// ---------------------------------------------------------
 
-
-	size_t signalPFChargedHadrCands_size() const
-	{return object->signalPFChargedHadrCands().size();}
+        size_t signalPFChargedHadrCands_size() const
+        {return object->signalPFChargedHadrCands().size();}
 	
   private:
     // -- User internals
@@ -203,6 +202,18 @@ namespace pat
     // from pat::Tau
     int decayMode() const { return object->decayMode(); }
 
+    // from pat::Tau
+    double dxy() const { return object->dxy(); }
+
+    // from pat::Tau
+    double dxy_error() const { return object->dxy_error(); }
+
+    // from pat::Tau
+    const math::XYZPoint dxy_PCA() const { return object->dxy_PCA(); }
+
+    // from pat::Tau
+    double dxy_Sig() const { return object->dxy_Sig(); }
+
     // from pat::Lepton<reco::BaseTau>
     float ecalIso() const { return object->ecalIso(); }
 
@@ -261,6 +272,18 @@ namespace pat
     float etaphiMoment() const { return object->etaphiMoment(); }
 
     // from pat::Tau
+    const math::XYZVector flightLength() const
+    { return object->flightLength(); }
+
+    // from pat::Tau
+    ROOT::Math::SMatrix<double,3,3,ROOT::Math::MatRepSym<double,3> >
+    flightLengthCov() const
+    { return object->flightLengthCov(); }
+
+    // from pat::Tau
+    double flightLengthSig() const { return object->flightLengthSig(); }
+
+    // from pat::Tau
     reco::GenJet* genJet() const { return (reco::GenJet*)object->genJet(); }
 
     // from pat::Lepton<reco::BaseTau>
@@ -303,6 +326,9 @@ namespace pat
     // from pat::PATObject<reco::BaseTau>
     bool hasOverlaps(std::string label) const
     { return object->hasOverlaps(label); }
+
+    // from pat::Tau
+    bool hasSecondaryVertex() const { return object->hasSecondaryVertex(); }
 
     // from pat::PATObject<reco::BaseTau>
     bool hasUserCand(std::string key) const
@@ -370,11 +396,12 @@ namespace pat
     { return object->isolationECALhitsEtSum(); }
 
     // from pat::Tau
-    const reco::PFCandidateRefVector isolationPFCands() const
+    const std::vector<edm::Ptr<reco::PFCandidate> > isolationPFCands() const
     { return object->isolationPFCands(); }
 
     // from pat::Tau
-    const reco::PFCandidateRefVector isolationPFChargedHadrCands() const
+    const std::vector<edm::Ptr<reco::PFCandidate> >
+    isolationPFChargedHadrCands() const
     { return object->isolationPFChargedHadrCands(); }
 
     // from pat::Tau
@@ -382,7 +409,8 @@ namespace pat
     { return object->isolationPFChargedHadrCandsPtSum(); }
 
     // from pat::Tau
-    const reco::PFCandidateRefVector isolationPFGammaCands() const
+    const std::vector<edm::Ptr<reco::PFCandidate> >
+    isolationPFGammaCands() const
     { return object->isolationPFGammaCands(); }
 
     // from pat::Tau
@@ -390,12 +418,18 @@ namespace pat
     { return object->isolationPFGammaCandsEtSum(); }
 
     // from pat::Tau
-    const reco::PFCandidateRefVector isolationPFNeutrHadrCands() const
+    const std::vector<edm::Ptr<reco::PFCandidate> >
+    isolationPFNeutrHadrCands() const
     { return object->isolationPFNeutrHadrCands(); }
 
     // from pat::Tau
     const std::vector<reco::RecoTauPiZero> isolationPiZeroCandidates() const
     { return object->isolationPiZeroCandidates(); }
+
+    // from pat::Tau
+    const std::vector<reco::PFRecoTauChargedHadron>
+    isolationTauChargedHadronCandidates() const
+    { return object->isolationTauChargedHadronCandidates(); }
 
     // from pat::Tau
     const reco::TrackRefVector isolationTracks() const
@@ -441,11 +475,11 @@ namespace pat
     bool jecSetsAvailable() const { return object->jecSetsAvailable(); }
 
     // from pat::Tau
-    const reco::PFCandidateRef leadPFCand() const
+    const reco::PFCandidatePtr leadPFCand() const
     { return object->leadPFCand(); }
 
     // from pat::Tau
-    const reco::PFCandidateRef leadPFChargedHadrCand() const
+    const reco::PFCandidatePtr leadPFChargedHadrCand() const
     { return object->leadPFChargedHadrCand(); }
 
     // from pat::Tau
@@ -453,8 +487,12 @@ namespace pat
     { return object->leadPFChargedHadrCandsignedSipt(); }
 
     // from pat::Tau
-    const reco::PFCandidateRef leadPFNeutralCand() const
+    const reco::PFCandidatePtr leadPFNeutralCand() const
     { return object->leadPFNeutralCand(); }
+
+    // from pat::Tau
+    reco::PFRecoTauChargedHadronRef leadTauChargedHadronCandidate() const
+    { return object->leadTauChargedHadronCandidate(); }
 
     // from pat::Tau
     reco::TrackRef leadTrack() const { return object->leadTrack(); }
@@ -577,6 +615,19 @@ namespace pat
     const math::PtEtaPhiMLorentzVector polarP4() const
     { return object->polarP4(); }
 
+    // from pat::Tau
+    const reco::VertexRef primaryVertex() const
+    { return object->primaryVertex(); }
+
+    // from pat::Tau
+    const ROOT::Math::SMatrix<double,3,3,ROOT::Math::MatRepSym<double,3> >
+    primaryVertexCov() const
+    { return object->primaryVertexCov(); }
+
+    // from pat::Tau
+    const math::XYZPoint primaryVertexPos() const
+    { return object->primaryVertexPos(); }
+
     // from reco::LeafCandidate
     double pt() const { return object->pt(); }
 
@@ -641,27 +692,47 @@ namespace pat
     { return object->resolTheta(label); }
 
     // from pat::Tau
+    const reco::VertexRef secondaryVertex() const
+    { return object->secondaryVertex(); }
+
+    // from pat::Tau
+    const ROOT::Math::SMatrix<double,3,3,ROOT::Math::MatRepSym<double,3> >
+    secondaryVertexCov() const
+    { return object->secondaryVertexCov(); }
+
+    // from pat::Tau
+    const math::XYZPoint secondaryVertexPos() const
+    { return object->secondaryVertexPos(); }
+
+    // from pat::Tau
     float segComp() const { return object->segComp(); }
 
     // from pat::Tau
-    const reco::PFCandidateRefVector signalPFCands() const
+    const std::vector<edm::Ptr<reco::PFCandidate> > signalPFCands() const
     { return object->signalPFCands(); }
 
     // from pat::Tau
-    const reco::PFCandidateRefVector signalPFChargedHadrCands() const
+    const std::vector<edm::Ptr<reco::PFCandidate> >
+    signalPFChargedHadrCands() const
     { return object->signalPFChargedHadrCands(); }
 
     // from pat::Tau
-    const reco::PFCandidateRefVector signalPFGammaCands() const
+    const std::vector<edm::Ptr<reco::PFCandidate> > signalPFGammaCands() const
     { return object->signalPFGammaCands(); }
 
     // from pat::Tau
-    const reco::PFCandidateRefVector signalPFNeutrHadrCands() const
+    const std::vector<edm::Ptr<reco::PFCandidate> >
+    signalPFNeutrHadrCands() const
     { return object->signalPFNeutrHadrCands(); }
 
     // from pat::Tau
     const std::vector<reco::RecoTauPiZero> signalPiZeroCandidates() const
     { return object->signalPiZeroCandidates(); }
+
+    // from pat::Tau
+    const std::vector<reco::PFRecoTauChargedHadron>
+    signalTauChargedHadronCandidates() const
+    { return object->signalTauChargedHadronCandidates(); }
 
     // from pat::Tau
     const reco::TrackRefVector signalTracks() const

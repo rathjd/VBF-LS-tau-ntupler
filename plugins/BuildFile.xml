@@ -94,12 +94,10 @@
 <use   name="rootminuit"/>
 <use   name="rootmath"/>
 <use   name="rootrflx"/>
-<use name="VBFntupleProducer/VBFntupleProducer"/>
-<library file="userplugin_patElectronHelper.cc" name="patElectronHelper">
-</library>
+<use name="ntuples/VBF-LS-tau-ntupler"/>
 <library file="userplugin_patTauHelper.cc" name="patTauHelper">
 </library>
-
-<use name="ntuples/VBF-LS-tau-ntupler"/>
+<library file="userplugin_patElectronHelper.cc" name="patElectronHelper">
+</library>
 <library file="userplugin_recoGenParticleHelperPlus.cc" name="recoGenParticleHelperPlus">
 </library>

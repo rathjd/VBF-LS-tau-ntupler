@@ -18,8 +18,8 @@ process.source = cms.Source("PoolSource",
 							fileNames =
 							cms.untracked.vstring(
                                                                           #"file:reco.root"
-    "/store/user/lveldere/VBFSUSY_C1pmC1pm_8TeV_Madgraph/VBFinclusive20130313_V3/4a34f2a69e63f3fe574e5dc5e8d98c50/skimPat_100_1_8aW.root"
-    #"file:skimPat.root"
+    #"/store/user/lveldere/VBFSUSY_C1pmC1pm_8TeV_Madgraph/VBFinclusive20130313_V3/4a34f2a69e63f3fe574e5dc5e8d98c50/skimPat_100_1_8aW.root"
+    "file:skimPat.root"
     )
 							)
 #process.load("VBFntupleProducer.VBFntupleProducer.ntuple_cfi")
@@ -30,6 +30,6 @@ process.source = cms.Source("PoolSource",
 #process.load("VBFntupleProducer.VBFntupleProducer.test_PFMET_cfi")
 #process.load("VBFntupleProducer.VBFntupleProducer.test_Trigger_cfi")
 #process.load("VBFntupleProducer.VBFntupleProducer.test_Jet_cfi")
-process.load("ntuples.VBF-LS-tau-ntupler.test_ntuple_cfi")
+process.load("ntuples.VBF-LS-tau-ntupler.ntuple_cfi")
 
 process.p = cms.Path(process.demo)

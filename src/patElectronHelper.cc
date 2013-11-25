@@ -1,11 +1,14 @@
 //-----------------------------------------------------------------------------
-// Subsystem:   VBFntupleProducer
-// Package:     VBFntupleProducer
+// Subsystem:   ntuples
+// Package:     VBF-LS-tau-ntupler
 // Description: TheNtupleMaker helper class for pat::Electron
-// Created:     Fri Apr  5 14:39:07 2013
+// Created:     Mon Nov 18 14:24:41 2013
 // Author:      Daniele Marconi      
 //-----------------------------------------------------------------------------
-#include "VBFntupleProducer/VBFntupleProducer/interface/patElectronHelper.h"
+#include "ntuples/VBF-LS-tau-ntupler/interface/patElectronHelper.h"
+#include "FWCore/Framework/interface/Event.h"
+#include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "HLTrigger/HLTcore/interface/HLTConfigProvider.h"
 //-----------------------------------------------------------------------------
 using namespace std;
 using namespace pat;
