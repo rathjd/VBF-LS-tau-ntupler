@@ -24,6 +24,7 @@ cms.EDAnalyzer("TheNtupleMaker",
     'GenRunInfoProduct',
     'recoGenParticleHelper',
     'recoGenParticleHelperPlus',
+    'ak5GenJets',
     'recoBeamSpot',
     'patJet',
     'patElectron',
@@ -149,6 +150,19 @@ cms.EDAnalyzer("TheNtupleMaker",
     ' double phi()',
     ' double mass()'
     ),
+
+                     ak5GenJets =
+                     cms.untracked.
+                     vstring(
+    'recoGenJet ak5GenJets 100',
+   #---------------------------------------------------------------------
+    ' int charge()',
+    ' double pt()',
+    ' double eta()',
+    ' double phi()',
+    ' double mass()'
+    ),
+
                      recoBeamSpot =
                      cms.untracked.
                      vstring(
