@@ -24,7 +24,7 @@ cms.EDAnalyzer("TheNtupleMaker",
     'GenRunInfoProduct',
     'recoGenParticleHelper',
     'recoGenParticleHelperPlus',
-    'ak5GenJets',
+    #'ak5GenJets',
     'recoBeamSpot',
     'patJet',
     'patElectron',
@@ -32,6 +32,7 @@ cms.EDAnalyzer("TheNtupleMaker",
     'patMuon',
     'patTau',
     'patMET',
+    'patMET2',
     'recoPFMET',
     'recoPFMET1',
     ),
@@ -56,6 +57,8 @@ cms.EDAnalyzer("TheNtupleMaker",
     'int prescale("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Prong1_v3") prescale_HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Prong1_v3',
     'int value("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Prong1_v4") value_HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Prong1_v4',
     'int prescale("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Prong1_v4") prescale_HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Prong1_v4',
+    'int value("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Prong1_v1 ") value_HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Prong1_v1 ',
+    'int prescale("HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Prong1_v1 ") prescale_HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Prong1_v1 ',
     'int value("HLT_DiPFJetAve40_v1...20") value_HLT_DiPFJetAve40_v',
     'int value("HLT_DiPFJetAve80_v1...20") value_HLT_DiPFJetAve80_v',
     'int value("HLT_DiPFJetAve140_v1...20") value_HLT_DiPFJetAve140_v',
@@ -444,6 +447,22 @@ cms.EDAnalyzer("TheNtupleMaker",
                cms.untracked.
                vstring(
     'patMET patMETs 200',
+    #---------------------------------------------------------------------
+    'double p()',
+    'double energy()',
+    'double et()',
+    'double px()',
+    'double py()',
+    'double pz()',
+    'double pt()',
+    'double phi()',
+    'double eta()'
+    ),
+
+               patMET2 =
+               cms.untracked.
+               vstring(
+    'patMET patPfMetT0pcT1Txy 200',
     #---------------------------------------------------------------------
     'double p()',
     'double energy()',
