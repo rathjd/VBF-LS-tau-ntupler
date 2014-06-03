@@ -93,7 +93,8 @@ cms.EDAnalyzer("TheNtupleMaker",
    'PileupSummaryInfo addPileupInfo 10',
    #---------------------------------------------------------------------
    ' int getBunchCrossing()',
-   ' int getPU_NumInteractions()'
+   ' int getPU_NumInteractions()',
+   ' float getTrueNumInteractions()'
    ),
 
                      edmEventHelper =
@@ -207,6 +208,7 @@ cms.EDAnalyzer("TheNtupleMaker",
     'float HFEMEnergy()',
     'float HFEMEnergyFraction()',
     'int chargedHadronMultiplicity()',
+    'int chargedMultiplicity()',
     'int neutralHadronMultiplicity()',
     'int photonMultiplicity()',
     'int electronMultiplicity()',
