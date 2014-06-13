@@ -49,7 +49,10 @@ cms.EDAnalyzer("TheNtupleMaker",
     'int value("HLT_PFNoPUHT350_PFMET100_v1..5") value_HLT_PFNoPUHT350_PFMET100_v',
     'int prescale("HLT_PFHT350_PFMET100_v1..3") prescale_HLT_PFHT350_PFMET100_v',
     'int prescale("HLT_PFNoPUHT350_PFMET100_v1..5") prescale_HLT_PFNoPUHT350_PFMET100_v',
-
+    'int prescale("HLT_IsoMu24_eta2p1_v1..16") prescale_HLT_IsoMu24_eta2p1_v',
+    'int prescale("HLT_IsoMu30_eta2p1_v1..16") prescale_HLT_IsoMu30_eta2p1_v',
+    'int prescale("HLT_IsoMu34_eta2p1_v1..14") prescale_HLT_IsoMu34_eta2p1_v',
+    'int prescale("HLT_IsoMu40_eta2p1_v1..11") prescale_HLT_IsoMu40_eta2p1_v',
     ),
 
                     recoVertex =
