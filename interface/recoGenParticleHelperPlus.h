@@ -110,6 +110,8 @@ namespace reco
 	
   private:
     // -- User internals
+    
+    std::vector<double> pdfWeights; 
 
     // Filled once per cached object
     std::vector<int> mothers_;
