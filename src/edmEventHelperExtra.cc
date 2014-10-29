@@ -34,7 +34,7 @@ void EventHelperExtra::analyzeEvent()
 {
 	pdfWeights.clear();
 	edm::Handle<vector<double> > _pdfWeights;
-	event->getByLabel(edm::InputTag("pdfWeights","cteq66"),_pdfWeights);
+	event->getByLabel(edm::InputTag("pdfWeights:cteq66"),_pdfWeights);
 	pdfWeights.insert(pdfWeights.begin(),_pdfWeights->begin(),_pdfWeights->end());
 }
 
