@@ -17,6 +17,8 @@ cms.EDAnalyzer("TheNtupleMaker",
                buffers =
                cms.untracked.
                vstring(
+
+    'edmEventHelperExtra',
     'edmTriggerResultsHelper',
     'recoVertex',
     'PileupSummaryInfo',
@@ -37,6 +39,13 @@ cms.EDAnalyzer("TheNtupleMaker",
     'recoPFMET1',
     ),
 
+
+               edmEventHelperExtra =
+               cms.untracked.
+               vstring(
+    'edmEventHelperExtra Event::edm 1',
+    #---------------------------------------------------------------------
+    ),
 
                #edmTriggerResults =
                edmTriggerResultsHelper =

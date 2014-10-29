@@ -20,6 +20,7 @@ process.source = cms.Source("PoolSource",
                                                                           #"file:reco.root"
     #"/store/user/lveldere/VBFSUSY_C1pmC1pm_8TeV_Madgraph/VBFinclusive20130313_V3/4a34f2a69e63f3fe574e5dc5e8d98c50/skimPat_100_1_8aW.root"
     "file:skimPat.root"
+    #"/store/user/gurrola/VBFC1pmN2_C1ToTau_N2ToTauTau_LSP000_Stau145_Chargino150_FastSim/SkimPat/0f98a4ed281a845dc018b4dc6f5f4af1/skimPat_100_3_1rT.root"
     )
 							)
 #process.load("VBFntupleProducer.VBFntupleProducer.ntuple_cfi")
