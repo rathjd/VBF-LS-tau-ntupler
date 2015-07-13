@@ -12,7 +12,6 @@
 <use   name="AnalysisDataFormats/TrackInfo"/>
 <use   name="DataFormats/BTauReco"/>
 <use   name="DataFormats/BeamSpot"/>
-<use   name="DataFormats/CSCDigi"/>
 <use   name="DataFormats/CaloRecHit"/>
 <use   name="DataFormats/CaloTowers"/>
 <use   name="DataFormats/Candidate"/>
@@ -20,13 +19,9 @@
 <use   name="DataFormats/Common"/>
 <use   name="DataFormats/EcalDigi"/>
 <use   name="DataFormats/EcalRawData"/>
-<use   name="DataFormats/EcalRecHit"/>
 <use   name="DataFormats/EgammaCandidates"/>
 <use   name="DataFormats/EgammaReco"/>
 <use   name="DataFormats/EgammaTrackReco"/>
-<use   name="DataFormats/FP420Cluster"/>
-<use   name="DataFormats/FP420Digi"/>
-<use   name="DataFormats/GeometryVector"/>
 <use   name="DataFormats/GsfTrackReco"/>
 <use   name="DataFormats/HLTReco"/>
 <use   name="DataFormats/HcalCalibObjects"/>
@@ -44,10 +39,7 @@
 <use   name="DataFormats/L1GlobalTrigger"/>
 <use   name="DataFormats/L1Trigger"/>
 <use   name="DataFormats/LTCDigi"/>
-<use   name="DataFormats/METObjects"/>
 <use   name="DataFormats/METReco"/>
-<use   name="DataFormats/MuonData"/>
-<use   name="DataFormats/MuonDetId"/>
 <use   name="DataFormats/MuonReco"/>
 <use   name="DataFormats/MuonSeed"/>
 <use   name="DataFormats/ParticleFlowCandidate"/>
@@ -57,11 +49,10 @@
 <use   name="DataFormats/RPCDigi"/>
 <use   name="DataFormats/RecoCandidate"/>
 <use   name="DataFormats/Scalers"/>
+<use   name="DataFormats/SiPixelCluster"/>
 <use   name="DataFormats/SiPixelDigi"/>
 <use   name="DataFormats/SiPixelRawData"/>
-<use   name="DataFormats/SiStripCluster"/>
 <use   name="DataFormats/SiStripCommon"/>
-<use   name="DataFormats/SiStripDigi"/>
 <use   name="DataFormats/TauReco"/>
 <use   name="DataFormats/TrackCandidate"/>
 <use   name="DataFormats/TrackReco"/>
@@ -79,7 +70,6 @@
 <use   name="SimDataFormats/HcalTestBeam"/>
 <use   name="SimDataFormats/HiGenData"/>
 <use   name="SimDataFormats/PileupSummaryInfo"/>
-<use   name="SimDataFormats/RPCDigiSimLink"/>
 <use   name="SimDataFormats/Track"/>
 <use   name="SimDataFormats/TrackerDigiSimLink"/>
 <use   name="SimDataFormats/TrackingAnalysis"/>
@@ -93,15 +83,11 @@
 <use   name="boost_regex"/>
 <use   name="rootminuit"/>
 <use   name="rootmath"/>
-<use   name="rootrflx"/>
+<use   nam="rootrflx"/>
 <use name="ntuples/VBF-LS-tau-ntupler"/>
+<library file="userplugin_recoGenParticleHelper2.cc" name="recoGenParticleHelper2">
+</library>
+<library file="userplugin_recoPFTauHelper.cc" name="recoPFTauHelper">
+</library>
 <library file="userplugin_patTauHelper.cc" name="patTauHelper">
-</library>
-<library file="userplugin_patElectronHelper.cc" name="patElectronHelper">
-</library>
-<library file="userplugin_recoGenParticleHelperPlus.cc" name="recoGenParticleHelperPlus">
-</library>
-
-<use name="FWCore/Framework"/>
-<library file="userplugin_edmEventHelperExtra.cc" name="edmEventHelperExtra">
 </library>

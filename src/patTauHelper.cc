@@ -2,7 +2,7 @@
 // Subsystem:   ntuples
 // Package:     VBF-LS-tau-ntupler
 // Description: TheNtupleMaker helper class for pat::Tau
-// Created:     Mon Nov 18 14:23:58 2013
+// Created:     Mon Jun  8 16:57:57 2015
 // Author:      Daniele Marconi      
 //-----------------------------------------------------------------------------
 #include "ntuples/VBF-LS-tau-ntupler/interface/patTauHelper.h"

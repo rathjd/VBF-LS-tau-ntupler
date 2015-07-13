@@ -4,7 +4,7 @@
 // Subsystem:   ntuples
 // Package:     VBF-LS-tau-ntupler
 // Description: TheNtupleMaker helper class for pat::Tau
-// Created:     Mon Nov 18 14:23:58 2013
+// Created:     Mon Jun  8 16:57:57 2015
 // Author:      Daniele Marconi      
 //-----------------------------------------------------------------------------
 #include <algorithm>
@@ -13,6 +13,7 @@
 #include <map>
 #include "PhysicsTools/TheNtupleMaker/interface/HelperFor.h"
 #include "DataFormats/PatCandidates/interface/Tau.h"
+#include "DataFormats/PatCandidates/interface/TauPFEssential.h"
 //-----------------------------------------------------------------------------
 // Definitions:
 //   helper:        object of class TauHelper
@@ -74,37 +75,32 @@ namespace pat
   class TauHelper : public HelperFor<pat::Tau>
   {
   public:
-	///
-	TauHelper();
+    ///
+    TauHelper();
 
-	virtual ~TauHelper();
+    virtual ~TauHelper();
 
-	// Uncomment if this class does some event-level analysis
-	// virtual void analyzeEvent();
+    // Uncomment if this class does some event-level analysis
+    // virtual void analyzeEvent();
 	 
-	// Uncomment if this class does some object-level analysis
-	// virtual void analyzeObject();
+    // Uncomment if this class does some object-level analysis
+    // virtual void analyzeObject();
 
-	// ---------------------------------------------------------
-	// -- User access methods go here
-	// ---------------------------------------------------------
-
-        size_t signalPFChargedHadrCands_size() const
-        {return object->signalPFChargedHadrCands().size();}
+    // ---------------------------------------------------------
+    // -- User access methods go here
+    // ---------------------------------------------------------
 	
   private:
-    // -- User internals
-
+    // -- User internals 
 
   public:
     // ---------------------------------------------------------
     // -- Access Methods
     // ---------------------------------------------------------
 
-	// WARNING: some methods may fail to compile because of coding
-	//          problems in one of the CMSSW base classes. If so,
-	//          just comment out the offending method and try again.
-  
+    // WARNING: some methods may fail to compile because of coding
+    //          problems in one of the CMSSW base classes. If so,
+    //          just comment out the offending method and try again. 
 
 
     // from reco::BaseTau
@@ -202,6 +198,12 @@ namespace pat
     // from pat::Tau
     int decayMode() const { return object->decayMode(); }
 
+    // from reco::LeafCandidate
+    /**
+    double dmass(GlobalVector v, double e) const
+    { return object->dmass(v, e); }
+    */
+
     // from pat::Tau
     double dxy() const { return object->dxy(); }
 
@@ -263,13 +265,19 @@ namespace pat
     double et() const { return object->et(); }
 
     // from reco::LeafCandidate
-    double eta() const { return object->eta(); }
+    float eta() const { return object->eta(); }
 
     // from pat::Tau
     float etaetaMoment() const { return object->etaetaMoment(); }
 
     // from pat::Tau
     float etaphiMoment() const { return object->etaphiMoment(); }
+
+    // from pat::Tau
+    bool ExistIsolationCands() const { return object->ExistIsolationCands(); }
+
+    // from pat::Tau
+    bool ExistSignalCands() const { return object->ExistSignalCands(); }
 
     // from pat::Tau
     const math::XYZVector flightLength() const
@@ -392,8 +400,24 @@ namespace pat
     */
 
     // from pat::Tau
+    reco::CandidatePtrVector isolationCands() const
+    { return object->isolationCands(); }
+
+    // from pat::Tau
+    reco::CandidatePtrVector isolationChargedHadrCands() const
+    { return object->isolationChargedHadrCands(); }
+
+    // from pat::Tau
     float isolationECALhitsEtSum() const
     { return object->isolationECALhitsEtSum(); }
+
+    // from pat::Tau
+    reco::CandidatePtrVector isolationGammaCands() const
+    { return object->isolationGammaCands(); }
+
+    // from pat::Tau
+    reco::CandidatePtrVector isolationNeutrHadrCands() const
+    { return object->isolationNeutrHadrCands(); }
 
     // from pat::Tau
     const std::vector<edm::Ptr<reco::PFCandidate> > isolationPFCands() const
@@ -475,6 +499,17 @@ namespace pat
     bool jecSetsAvailable() const { return object->jecSetsAvailable(); }
 
     // from pat::Tau
+    const reco::CandidatePtr leadCand() const { return object->leadCand(); }
+
+    // from pat::Tau
+    const reco::CandidatePtr leadChargedHadrCand() const
+    { return object->leadChargedHadrCand(); }
+
+    // from pat::Tau
+    const reco::CandidatePtr leadNeutralCand() const
+    { return object->leadNeutralCand(); }
+
+    // from pat::Tau
     const reco::PFCandidatePtr leadPFCand() const
     { return object->leadPFCand(); }
 
@@ -512,13 +547,18 @@ namespace pat
     bool longLived() const { return object->longLived(); }
 
     // from reco::LeafCandidate
-    double mass() const { return object->mass(); }
+    /**
+    double magd(GlobalVector v) const { return object->magd(v); }
+    */
+
+    // from reco::LeafCandidate
+    float mass() const { return object->mass(); }
 
     // from reco::LeafCandidate
     bool massConstraint() const { return object->massConstraint(); }
 
     // from reco::LeafCandidate
-    double massSqr() const { return object->massSqr(); }
+    float massSqr() const { return object->massSqr(); }
 
     // from pat::Tau
     float maximumHCALhitEt() const { return object->maximumHCALhitEt(); }
@@ -552,7 +592,7 @@ namespace pat
     // from reco::LeafCandidate
     size_t numberOfMothers() const { return object->numberOfMothers(); }
 
-    // from reco::LeafCandidate
+    // from pat::Tau
     size_t numberOfSourceCandidatePtrs() const
     { return object->numberOfSourceCandidatePtrs(); }
 
@@ -596,6 +636,10 @@ namespace pat
     int pdgId() const { return object->pdgId(); }
 
     // from pat::Tau
+    const pat::tau::TauPFEssential pfEssential() const
+    { return object->pfEssential(); }
+
+    // from pat::Tau
     const reco::PFJetRef pfJetRef() const { return object->pfJetRef(); }
 
     // from pat::Tau
@@ -603,7 +647,7 @@ namespace pat
     { return object->pfSpecific(); }
 
     // from reco::LeafCandidate
-    double phi() const { return object->phi(); }
+    float phi() const { return object->phi(); }
 
     // from pat::Tau
     float phiphiMoment() const { return object->phiphiMoment(); }
@@ -629,7 +673,7 @@ namespace pat
     { return object->primaryVertexPos(); }
 
     // from reco::LeafCandidate
-    double pt() const { return object->pt(); }
+    float pt() const { return object->pt(); }
 
     // from pat::Lepton<reco::BaseTau>
     float puChargedHadronIso() const { return object->puChargedHadronIso(); }
@@ -708,6 +752,22 @@ namespace pat
     float segComp() const { return object->segComp(); }
 
     // from pat::Tau
+    reco::CandidatePtrVector signalCands() const
+    { return object->signalCands(); }
+
+    // from pat::Tau
+    reco::CandidatePtrVector signalChargedHadrCands() const
+    { return object->signalChargedHadrCands(); }
+
+    // from pat::Tau
+    reco::CandidatePtrVector signalGammaCands() const
+    { return object->signalGammaCands(); }
+
+    // from pat::Tau
+    reco::CandidatePtrVector signalNeutrHadrCands() const
+    { return object->signalNeutrHadrCands(); }
+
+    // from pat::Tau
     const std::vector<edm::Ptr<reco::PFCandidate> > signalPFCands() const
     { return object->signalPFCands(); }
 
@@ -742,7 +802,7 @@ namespace pat
     float signalTracksInvariantMass() const
     { return object->signalTracksInvariantMass(); }
 
-    // from reco::LeafCandidate
+    // from pat::Tau
     reco::CandidatePtr sourceCandidatePtr(size_t i) const
     { return object->sourceCandidatePtr(i); }
 

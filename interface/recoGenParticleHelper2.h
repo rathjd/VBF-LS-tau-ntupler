@@ -1,10 +1,10 @@
-#ifndef RECOGENPARTICLEHELPERPLUS_H
-#define RECOGENPARTICLEHELPERPLUS_H
+#ifndef RECOGENPARTICLEHELPER2_H
+#define RECOGENPARTICLEHELPER2_H
 //-----------------------------------------------------------------------------
 // Subsystem:   ntuples
 // Package:     VBF-LS-tau-ntupler
 // Description: TheNtupleMaker helper class for reco::GenParticle
-// Created:     Mon Nov 18 14:27:14 2013
+// Created:     Mon Jun  8 15:27:21 2015
 // Author:      Daniele Marconi      
 //-----------------------------------------------------------------------------
 #include <algorithm>
@@ -15,7 +15,7 @@
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 //-----------------------------------------------------------------------------
 // Definitions:
-//   helper:        object of class GenParticleHelperPlus
+//   helper:        object of class GenParticleHelper2
 //   helped object: object of class reco::GenParticle
 //
 //
@@ -71,46 +71,34 @@
 namespace reco
 {
   /// A helper class for reco::GenParticle.
-  class GenParticleHelperPlus : public HelperFor<reco::GenParticle>
+  class GenParticleHelper2 : public HelperFor<reco::GenParticle>
   {
   public:
-	///
-	GenParticleHelperPlus();
+    ///
+    GenParticleHelper2();
 
-	virtual ~GenParticleHelperPlus();
+    virtual ~GenParticleHelper2();
 
-	///
-	virtual void analyzeEvent();
-	///
-	virtual void analyzeObject();
-	///
-	int charge() const;
-	///
-	int pdgId() const;
-	///
-	int status() const;
-	///
-	double energy() const;
-	///
-	double pt() const;
-	///
-	double eta() const;
-	///
-	double phi() const;
-	///
-	double mass() const;
-	///
-	int firstMother() const;
-	///
-	int lastMother() const;
-	///
-	int firstDaughter() const;
-	///
-	int lastDaughter() const;
+    // Uncomment if this class does some event-level analysis
+    virtual void analyzeEvent();
+	 
+    // Uncomment if this class does some object-level analysis
+    virtual void analyzeObject();
+
+    // ---------------------------------------------------------
+    // -- User access methods go here
+    // ---------------------------------------------------------
 	
+    int firstMother() const;
+    ///
+    int lastMother()  const;
+    ///
+    int firstDaughter() const;
+    ///
+    int lastDaughter()  const;
+    
   private:
-    // -- User internals
-
+    // -- User internals 
     // Filled once per cached object
     std::vector<int> mothers_;
     std::vector<int> daughters_;
@@ -123,14 +111,23 @@ namespace reco
     // -- Access Methods
     // ---------------------------------------------------------
 
-	// WARNING: some methods may fail to compile because of coding
-	//          problems in one of the CMSSW base classes. If so,
-	//          just comment out the offending method and try again.
-  
+    // WARNING: some methods may fail to compile because of coding
+    //          problems in one of the CMSSW base classes. If so,
+    //          just comment out the offending method and try again. 
 
+
+    // from reco::Candidate
+    reco::Track* bestTrack() const
+    { return (reco::Track*)object->bestTrack(); }
 
     // from reco::LeafCandidate
     math::XYZVector boostToCM() const { return object->boostToCM(); }
+
+    // from reco::LeafCandidate
+    int charge() const { return object->charge(); }
+
+    // from reco::CompositeRefCandidateT<edm::RefVector<std::vector<reco::GenParticle>,reco::GenParticle,edm::refhelper::FindUsingAdvance<std::vector<reco::GenParticle>,reco::GenParticle> > >
+    short Class_Version() const { return object->Class_Version(); }
 
     // from reco::GenParticle
     int collisionId() const { return object->collisionId(); }
@@ -149,7 +146,19 @@ namespace reco
     { return object->daughterRefVector(); }
 
     // from reco::LeafCandidate
+    /**
+    double dmass(GlobalVector v, double e) const
+    { return object->dmass(v, e); }
+    */
+
+    // from reco::LeafCandidate
+    double energy() const { return object->energy(); }
+
+    // from reco::LeafCandidate
     double et() const { return object->et(); }
+
+    // from reco::LeafCandidate
+    float eta() const { return object->eta(); }
 
     // from reco::LeafCandidate
     bool isCaloMuon() const { return object->isCaloMuon(); }
@@ -182,10 +191,18 @@ namespace reco
     bool longLived() const { return object->longLived(); }
 
     // from reco::LeafCandidate
+    /**
+    double magd(GlobalVector v) const { return object->magd(v); }
+    */
+
+    // from reco::LeafCandidate
+    float mass() const { return object->mass(); }
+
+    // from reco::LeafCandidate
     bool massConstraint() const { return object->massConstraint(); }
 
     // from reco::LeafCandidate
-    double massSqr() const { return object->massSqr(); }
+    float massSqr() const { return object->massSqr(); }
 
     // from reco::LeafCandidate
     math::XYZVector momentum() const { return object->momentum(); }
@@ -226,8 +243,17 @@ namespace reco
     const math::XYZTLorentzVector p4() const { return object->p4(); }
 
     // from reco::LeafCandidate
+    int pdgId() const { return object->pdgId(); }
+
+    // from reco::LeafCandidate
+    float phi() const { return object->phi(); }
+
+    // from reco::LeafCandidate
     const math::PtEtaPhiMLorentzVector polarP4() const
     { return object->polarP4(); }
+
+    // from reco::LeafCandidate
+    float pt() const { return object->pt(); }
 
     // from reco::LeafCandidate
     double px() const { return object->px(); }
@@ -244,6 +270,9 @@ namespace reco
     // from reco::LeafCandidate
     reco::CandidatePtr sourceCandidatePtr(size_t i) const
     { return object->sourceCandidatePtr(i); }
+
+    // from reco::LeafCandidate
+    int status() const { return object->status(); }
 
     // from reco::LeafCandidate
     double theta() const { return object->theta(); }

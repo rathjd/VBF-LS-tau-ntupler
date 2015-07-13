@@ -1,10 +1,8 @@
 <lcgdict>
+ <class name="HelperFor<reco::GenParticle>"/>
+ <class name="reco::GenParticleHelper2"/>
+ <class name="HelperFor<reco::PFTau>"/>
+ <class name="reco::PFTauHelper"/>
  <class name="HelperFor<pat::Tau>"/>
  <class name="pat::TauHelper"/>
- <class name="HelperFor<pat::Electron>"/>
- <class name="pat::ElectronHelper"/>
- <class name="HelperFor<reco::GenParticle>"/>
- <class name="reco::GenParticleHelperPlus"/>
- <class name="HelperFor<edm::Event>"/>
- <class name="edm::EventHelperExtra"/>
 </lcgdict>
