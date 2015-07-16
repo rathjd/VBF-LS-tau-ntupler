@@ -1,15 +1,15 @@
 #$Revision: 1.1 $
 import FWCore.ParameterSet.Config as cms
-#from FWCore.ParameterSet.VarParsing import VarParsing
-#options = VarParsing ('python')
+from FWCore.ParameterSet.VarParsing import VarParsing
+options = VarParsing ('python')
 
-#options.register ('filepath',
-#		False,
-#		VarParsing.multiplicity.singleton,
-#		VarParsing.varType.string,
-#		"produces pdf weights for uncertainties study")
-#options.parseArguments()
-#filepath = options.filepath
+options.register ('filepath',
+		False,
+		VarParsing.multiplicity.singleton,
+		VarParsing.varType.string,
+		"Filepath input")
+options.parseArguments()
+filepath = options.filepath
 
 process = cms.Process("TheNtupleMaker")
 
@@ -22,28 +22,28 @@ process.load("FWCore.MessageService.MessageLogger_cfi")
 # This is required in order to configure HLTConfigProducer
 process.load("L1TriggerConfig.L1GtConfigProducers.L1GtConfig_cff")
 
-#process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
-process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(10) )
+process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(-1) )
+#process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(10) )
 
 process.source = cms.Source("PoolSource",
 							fileNames =
 							cms.untracked.vstring( 
 								#'file:'+filepath,
 								#filepath,
-								"file:VBFC1pmN2_C1ToTau_N2ToTauTau_LSP050_Stau195_Chargino200_qcd0_qed4_unwgt_MINIAODSIM_4.root"
+								#"file:VBFC1pmN2_C1ToTau_N2ToTauTau_LSP050_Stau195_Chargino200_qcd0_qed4_unwgt_MINIAODSIM_4.root"
 								#'/store/mc/Phys14DR/QCD_Pt-80to120_Tune4C_13TeV_pythia8/MINIAODSIM/PU20bx25_trkalmb_castor_PHYS14_25_V1-v2/00000/0629F4F9-E37C-E411-A6F3-002590D0AFF6.root',
 												  )
 							)
-#FILE = open(filepath)
-#lines = FILE.readlines()
-#FILE.close()
-#filelist = []
-#for line in lines:
-#	line = line.strip()
-#	if len(line) == 0:
-#		continue
-#	filelist.append("file:" + line)
-#process.source.fileNames = filelist
+FILE = open(filepath)
+lines = FILE.readlines()
+FILE.close()
+filelist = []
+for line in lines:
+	line = line.strip()
+	if len(line) == 0:
+		continue
+	filelist.append("file:" + line)
+process.source.fileNames = filelist
 
 process.load("ntuples.VBF-LS-tau-ntupler.ntuple_cfi")
 
