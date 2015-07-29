@@ -51,41 +51,9 @@ GenParticleHelper2::analyzeEvent()
       //if ( p->status() != 3 ) break;
 
       bool store = false;
-      //store particles with status 3
-      if(p->status()==3)
+      //store particles with status 2 and 1
+      if( (p->status()==2) || (p->status()==1) )
         store = true;
-      //store the decaying b and c hadrons 
-      //(allways status 2)
-      else if(p->status()==2)
-        {
-          int p_h = abs(p->pdgId()%1000/100);
-          int p_t = abs(p->pdgId()%10000/1000);
-          int taste = -1;
-          //if the particle is a b meson or baryon
-          if(p_h==5 || p_t == 5)
-            taste = 5;
-          //if the particle is a c meson or baryon
-          else if(p_h==4 || p_t == 4)
-            taste = 4;
-          if(taste >0)
-            {
-              //store the particle
-              store = true;
-              //if it decays to a particle of different 'taste'
-              for(unsigned int d = 0;d<p->numberOfDaughters();++d)
-                {
-                  int d_h = abs(p->daughter(d)->pdgId()%1000/100);
-                  int d_t = abs(p->daughter(d)->pdgId()%10000/1000);
-                  if(d_h==taste||d_t==taste)
-                    store = false;
-                }
-            }
-        }
-      else if(p->status()==1)
-        {
-          if(p->pt() > 2)
-            store = ( abs(p->pdgId()) == 11 || abs(p->pdgId()) == 13 || abs(p->pdgId())== 15);
-        }
       if ( !store ) break;
 
       char particle[255];
@@ -113,40 +81,10 @@ GenParticleHelper2::analyzeObject()
   
   bool store = false;
   //store particles with status 3
-  if(object->status()==3)
+  if( (object->status()==2) || (object->status()==1) )
     store = true;
   //store the decaying b and c hadrons 
   //(allways status 2)
-  else if(object->status()==2)
-    {
-      int p_h = abs(object->pdgId()%1000/100);
-      int p_t = abs(object->pdgId()%10000/1000);
-      int taste = -1;
-      //if the particle is a b meson or baryon
-      if(p_h==5 || p_t == 5)
-        taste = 5;
-      //if the particle is a c meson or baryon
-      else if(p_h==4 || p_t == 4)
-        taste = 4;
-      if(taste >0)
-        {
-          //store the particle
-          store = true;
-          //if it decays to a particle of different 'taste'
-          for(unsigned int d = 0;d<object->numberOfDaughters();++d)
-            {
-              int d_h = abs(object->daughter(d)->pdgId()%1000/100);
-              int d_t = abs(object->daughter(d)->pdgId()%10000/1000);
-              if(d_h==taste||d_t==taste)
-                store = false;
-            }
-        }
-    }
-  else if(object->status()==1)
-    {
-      if(object->pt() > 2)
-        store = ( abs(object->pdgId()) == 11 || abs(object->pdgId()) == 13 || abs(object->pdgId())== 15);
-    }
 
   if ( !store )
   //  if ( object->status() != 3 )

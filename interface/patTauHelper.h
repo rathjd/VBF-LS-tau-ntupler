@@ -89,7 +89,14 @@ namespace pat
     // ---------------------------------------------------------
     // -- User access methods go here
     // ---------------------------------------------------------
-	
+
+
+    //size_t signalPFChargedHadrCands_size() const
+    //{return object->signalPFChargedHadrCands().size();}
+
+    size_t signalChargedHadrCands_size() const
+    {return object->signalChargedHadrCands().size();}
+
   private:
     // -- User internals 
 
